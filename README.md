@@ -10,13 +10,7 @@ The app manages **Travels** (header) and **Expenses/Items** (child) with a draft
 
 ## 🎥 Demo video
 
-- [Watch the demo video](RAP_APP_ABAP.mp4)
-
-> [!TIP]
-> If you want a nice preview, add an image thumbnail and link it to the MP4:
-> `[![Demo](docs/demo_thumbnail.png)](docs/demo.mp4)`
-
----
+https://github.com/user-attachments/assets/01ef2078-28de-49a7-9f80-f67653c7e03a
 
 ## What this app covers
 
