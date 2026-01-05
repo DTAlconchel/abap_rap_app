@@ -10,7 +10,7 @@ The app manages **Travels** (header) and **Expenses/Items** (child) with a draft
 
 ## 🎥 Demo video
 
-https://github.com/user-attachments/assets/01ef2078-28de-49a7-9f80-f67653c7e03a
+https://github.com/user-attachments/assets/25f0c362-c816-4368-9859-2ca7099872ad
 
 ## What this app covers
 
