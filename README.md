@@ -21,7 +21,7 @@ The app manages **Travels** (header) and **Expenses/Items** (child) with a draft
 ### Option B: Store video in the repo (only if small)
 Place it under `docs/demo.mp4` and add:
 
-- [Watch the demo video](docs/demo.mp4)
+- [Watch the demo video](RAP_APP_ABAP.mp4)
 
 > [!TIP]
 > If you want a nice preview, add an image thumbnail and link it to the MP4:
