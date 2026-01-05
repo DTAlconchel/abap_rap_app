@@ -10,17 +10,6 @@ The app manages **Travels** (header) and **Expenses/Items** (child) with a draft
 
 ## 🎥 Demo video
 
-### Option A (recommended): GitHub Assets link
-1. Create an Issue (you can close it later).
-2. Drag & drop your `demo.mp4` into the comment.
-3. GitHub will generate an **assets URL**.
-4. Paste it here:
-
-- **Demo walkthrough (MP4):** <PASTE_ASSETS_URL_HERE>
-
-### Option B: Store video in the repo (only if small)
-Place it under `docs/demo.mp4` and add:
-
 - [Watch the demo video](RAP_APP_ABAP.mp4)
 
 > [!TIP]
