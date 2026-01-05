@@ -1,0 +1,12 @@
+@EndUserText.label: 'Acces Control RAP'
+@MappingRole: true
+define role ZC_TEST_RAP {
+    grant
+        select
+            on
+                ZC_TEST_RAP;
+//                    where
+//                        (OverallStatus) = aspect pfcg_auth( 'Z_TEST_RAP', ZOVSTATUS, ACTVT = '03' )
+//                    and  CurrencyCode   = 'EUR';
+                        
+}

@@ -1,0 +1,67 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Test',
+    typeNamePlural: 'Tests',
+    title: { type: #STANDARD, value: 'Description' }   
+  },
+  presentationVariant: [{ visualizations: [{ type: #AS_LINEITEM }] }]
+}
+
+annotate view ZC_TEST_RAP with
+{
+  @UI.facet: [ 
+                { id: 'idIdentification', type: #IDENTIFICATION_REFERENCE, label: 'General', position: 10 },
+                { id: 'Items', type: #LINEITEM_REFERENCE, label: 'Items', position: 20, targetElement: '_Items' }
+             ]
+  
+  @UI.hidden: true
+  TravelUUID;
+  
+  
+  @UI.lineItem: [ { position: 10 , importance: #MEDIUM, label: 'TravelID' } ]
+  @UI.identification: [ { position: 10 , label: 'TravelID' } ]
+  @UI.selectionField: [ { position: 10 } ]
+  @UI.textArrangement: #TEXT_FIRST
+  TravelID;
+  
+  @UI.lineItem: [ { position: 20 , importance: #MEDIUM, label: 'CustomerID' } ]
+  @UI.identification: [ {position: 20 , label: 'CustomerID' } ]
+  @UI.selectionField: [ { position: 20 } ]
+  @UI.textArrangement: #TEXT_FIRST
+  CustomerID;
+  
+  @UI.lineItem: [ { position: 30 , importance: #MEDIUM, label: 'BeginDate' } ]
+  @UI.identification: [ { position: 30 , label: 'BeginDate' } ]  
+  BeginDate;
+  
+  @UI.lineItem: [ { position: 40 , importance: #MEDIUM, label: 'EndDate' } ]
+  @UI.identification: [ { position: 40 , label: 'EndDate' } ]
+  EndDate;
+  
+  @UI.lineItem: [ { position: 50 , importance: #MEDIUM, label: 'BookingFee' } ]
+  @UI.identification: [ { position: 50 , label: 'BookingFee' } ]
+  BookingFee;
+  
+  @UI.lineItem: [ { position: 60 , importance: #MEDIUM, label: 'TotalPrice' } ]
+  @UI.identification: [ { position: 60 , label: 'TotalPrice' } ]
+  TotalPrice;
+  
+  @UI.lineItem: [ { position: 70 , importance: #MEDIUM, label: 'CurrencyCode' } ]
+  @UI.identification: [ { position: 70 , label: 'CurrencyCode' } ]
+  CurrencyCode;
+  
+  @UI.lineItem: [ { position: 80 , importance: #MEDIUM, label: 'Description' } ]
+  @UI.identification: [ { position: 80 , label: 'Description' } ]
+  Description;
+  
+  @UI.lineItem: [ { position: 90 , importance: #MEDIUM, label: 'OverallStatus'},
+                  { position: 5, type: #FOR_ACTION, dataAction: 'Approve', label: 'Approve' },
+                  { position: 6, type: #FOR_ACTION, dataAction: 'Reject',  label: 'Reject'  }
+  ]
+  // @UI.identification: [ { position: 90 , label: 'OverallStatus' } ] - No aparezca en el detalle
+  OverallStatus;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

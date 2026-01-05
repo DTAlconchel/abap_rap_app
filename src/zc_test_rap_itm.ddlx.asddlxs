@@ -1,0 +1,56 @@
+@Metadata.layer: #CORE
+
+@UI.chart: [
+  {
+    qualifier: 'itemShareChart',
+    title: 'Item Share',
+    description: 'Item amount in relation to total travel price',
+    chartType: #DONUT,
+    measures: ['Amount'],
+    measureAttributes: [
+      { measure: 'Amount', role: #AXIS_1, asDataPoint: true }
+    ]
+  }
+]
+
+annotate view ZC_TEST_RAP_ITM with
+{
+  @UI.facet: [{ id: 'ItemGeneral', type: #IDENTIFICATION_REFERENCE, label: 'General', position: 10 }]
+
+  @UI.identification: [ { position: 10, label: 'Item Type' } ]
+  @UI.lineItem:       [ { position: 10, label: 'Item Type' } ]
+  @UI.textArrangement: #TEXT_FIRST
+  ItemTypeID;
+
+ // Amount se muestra como número + donut como columna adicional
+  @UI.identification: [ { position: 20, label: 'Amount' } ]
+  @UI: {
+    dataPoint: {
+      targetValueElement: 'TotalPriceForChart'
+    },
+    lineItem: [
+      { position: 20, label: 'Amount' },
+      { type: #AS_CHART, label: 'Share', valueQualifier: 'itemShareChart', position: 25 }
+    ]
+  }
+  Amount;
+
+  @UI.identification: [ { position: 30, label: 'Currency' } ]
+  @UI.lineItem:       [ { position: 30, label: 'Currency' } ]
+  CurrencyCode;
+  
+  
+
+  @UI.identification: [ { position: 40, label: 'Note' } ]
+  @UI.lineItem:       [ { position: 40, label: 'Note' } ]
+  Note;
+  
+  @UI.hidden: true
+  TotalPriceForChart;
+
+  @UI.hidden: true
+  ItemUUID;
+
+  @UI.hidden: true
+  TravelUUID;
+}

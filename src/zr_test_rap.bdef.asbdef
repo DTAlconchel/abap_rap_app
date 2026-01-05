@@ -1,0 +1,125 @@
+managed implementation in class ZBP_R_TEST_RAP unique; // Clase Z - Punto de extensión Z
+strict ( 2 ); // Modo estricto de sintaxis
+with draft;   // draft + tabla _D activa borradores
+
+define behavior for ZR_TEST_RAP alias Test
+persistent table ztest_rap
+draft table ZTEST_RAP_D
+etag master LocalLastChangedAt // Control de concurrencia
+lock master total etag LastChangedAt // Bloqueo
+authorization master( global )
+
+{
+
+  field ( readonly ) // Campos solo lectura
+   TravelUUID,
+   LocalCreatedAt,
+   LocalCreatedBy,
+   LastChangedAt,
+   LocalLastChangedAt,
+   LocalLastChangedBy;
+
+  field ( numbering : managed ) // Clave autogenerada
+   TravelUUID;
+
+   field ( mandatory )
+    TravelID,
+    CustomerID,
+    BeginDate,
+    EndDate,
+    TotalPrice,
+    CurrencyCode;
+
+
+  create;
+  update;
+  delete;
+
+  association _Items { create; with draft; }
+
+  validation validateCustomer on save { create; update; field CustomerID; }
+  validation validateTravel on save { create; update; field TravelID; }
+
+
+  action (features : instance) Reject  result [1] $self;
+  action (features : instance) Approve result [1] $self;
+
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare {
+      validation validateCustomer;
+      validation validateTravel;
+      validation Item~validateItemsSum;
+  }
+
+  mapping for ZTEST_RAP
+  {
+    TravelUUID = travel_uuid;
+    TravelID = travel_id;
+    CustomerID = customer_id;
+    BeginDate = begin_date;
+    EndDate = end_date;
+    BookingFee = booking_fee;
+    TotalPrice = total_price;
+    CurrencyCode = currency_code;
+    Description = description;
+    OverallStatus = overall_status;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+}
+
+define behavior for ZR_TEST_RAP_ITM alias Item
+persistent table ztest_rap_itm
+draft table ztest_rap_itm_d
+lock dependent by _Test
+authorization dependent by _Test
+
+{
+
+  field ( readonly ) // Campos solo lectura
+   TravelUUID,
+   ItemUUID,
+   LocalCreatedAt,
+   LocalCreatedBy,
+   LastChangedAt,
+   LocalLastChangedAt,
+   LocalLastChangedBy;
+
+   field ( numbering : managed ) // Clave autogenerada
+    ItemUUID;
+
+   field ( mandatory )
+    ItemTypeID,
+    Amount,
+    CurrencyCode;
+
+  update;
+  delete;
+
+  association _Test {with draft; }
+
+  validation validateItemsSum on save { create; update; field Amount; }
+
+  mapping for ztest_rap_itm
+  {
+    ItemUUID           = item_uuid;
+    TravelUUID         = travel_uuid;
+    ItemTypeID         = item_type;
+    Amount             = amount;
+    CurrencyCode       = currency_code;
+    Note               = note;
+
+    LocalCreatedBy     = local_created_by;
+    LocalCreatedAt     = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt      = last_changed_at;
+  }	
+}
